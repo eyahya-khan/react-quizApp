@@ -9,18 +9,21 @@
   color: white;
   text-align: center;
 }
-.container-ques-ans-display{
+.container-ques-ans-display {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 0px;
 }
-.container-question{
-   padding: 0 10%;
+.container-question {
+  padding: 0 10%;
 }
-.correct-answer{
- color:#ffc107b7
+.correct-answer {
+  color: #ffc107b7;
+}
+.container-result-body {
+  text-align: left;
 }
 
 h1,
