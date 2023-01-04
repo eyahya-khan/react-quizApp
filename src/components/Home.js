@@ -3,6 +3,7 @@ import "../App.css"
 import Progress from './Progress';
 import Answers from './Answers'
 import Question from './Question'
+import { questions } from './Questions';
 
 function Home() {
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -10,39 +11,7 @@ function Home() {
     const [answers, setAnswers] = useState([]);
     const [error, setError] = useState("");
     const [showReults, setShowResults] = useState(false);
-  
-    const questions = [
-      {
-        id: 1,
-        question: "Which statement about Hooks is not true?",
-        answer_a:
-          "Hooks are 100% backwards-compatible and can be used side by side with classes",
-        answer_b: "Hooks are still in beta and not available yet",
-        answer_c:
-          "Hooks are completely opt-in, there's no need to rewrite existing code",
-        answer_d: "All of the above",
-        correct_answer: "b",
-      },
-      {
-        id: 2,
-        question: "Which one is not a Hook?",
-        answer_a: "useState()",
-        answer_b: "useConst()",
-        answer_c: "useReducer()",
-        answer_d: "All of the above",
-        correct_answer: "b",
-      },
-      {
-        id: 3,
-        question: "What Hook should be used for data fetching?",
-        answer_a: "useDataFetching()",
-        answer_b: "useApi()",
-        answer_c: "useEffect()",
-        answer_d: "useRequest()",
-        correct_answer: "c",
-      },
-    ];
-    
+
     const question = questions[currentQuestion];
     // when click on option text (A, B, C, D)
     const handleClick = (e) => {
@@ -57,14 +26,28 @@ function Home() {
       }
       return <div className="error">{error}</div>;
     };
+
+    // const counter = (question, answer)=> {
+    //     let counter = 1
+    //     for(let i=0; i<question.length; i++){
+    //       if (question.correct_answer === answer.answer) {
+    //           return counter++
+    //         } 
+    //     }
+    // }
+
     // Result is correct or falied
     const renderResultMark = (question, answer) => {
-      let score = 0;
-      if (question.correct_answer === answer.answer) {
-        return <span className="correct">Correct - Score: {score + 1}</span>;
-      } else {
-        return <span className="failed"> Falied - Score: {score}</span>;
-      }
+          if (question.correct_answer === answer.answer) {
+            return <span className="correct">Correct</span>;
+          } else {
+            return <>
+            <span className="failed"> Incorrect</span>
+            <div className='correct-answer'>
+            <span>You select: {answer.answer} - Correct answer is: {question.correct_answer}</span>
+            </div>
+            </>
+          }
     };
     // show the result with question
     const renderResultData = () => {
@@ -73,9 +56,12 @@ function Home() {
           (question) => question.id === answer.questionId
         );
         return (
-          <div key={question.id}>
-            {question.question}-{renderResultMark(question, answer)}
+            <>
+            {/* <div>{counter(question,answer)}</div> */}
+            <div key={question.id}>
+            Question {question.id}: {renderResultMark(question, answer)}
           </div>
+          </>
         );
       });
     };
@@ -109,7 +95,7 @@ function Home() {
     if (showReults) {
       return (
         <div className="container results">
-          Results
+        <h4> Your test Results </h4>
           {/* display all question */}
           {renderResultData()}
           <button className="btn btn-primary" onClick={restart}>
@@ -122,18 +108,19 @@ function Home() {
         <div className="container">
           {/* current = {question.id} also works*/}
           <Progress current={currentQuestion + 1} total={questions.length} />
-          {/* 1.question = props, 2.question = object name(original questions) 3.question=object property*/}
+          <div className='container-ques-ans-display'>
           <Question question={question.question} />
           {/* display error message */}
+          <div>
           {renderError()}
           <Answers
             question={question}
             currentAnswer={currentAnswer}
             handleClick={handleClick}
           />
-          <button className="btn btn-primary" onClick={next}>
-            Next
-          </button>
+          <button className="btn btn-primary" onClick={next}> Next</button>
+          </div>
+        </div>
         </div>
       );
     }

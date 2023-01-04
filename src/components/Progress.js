@@ -4,7 +4,7 @@ function Progress(props) {
   return (
     <div>
       <h2>
-        Question {props.current} out of {props.total}
+        Question {props.current} / {props.total}
       </h2>
     </div>
   );
