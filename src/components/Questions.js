@@ -26,4 +26,13 @@ export const questions = [
       answer_d: "o=f;",
       correct_answer: "a",
     },
+    {
+    id: 4,
+    question: "How much is 2+4*5+1 = ? ",
+    answer_a: "23",
+    answer_b: "36",
+    answer_c: "31",
+    answer_d: "26",
+    correct_answer: "a",
+      },
   ];
