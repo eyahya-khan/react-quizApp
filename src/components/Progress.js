@@ -1,6 +1,9 @@
-import React from "react";
+import React,{useContext} from "react";
+// import { userContext } from "./Home";
 
 function Progress(props) {
+  // const total = useContext(userContext)
+  // const current = useContext(userContext)
   return (
     <div>
       <h2>

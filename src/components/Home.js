@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import "../App.css";
 import Progress from "./Progress";
 import Answers from "./Answers";
 import Question from "./Question";
 import { questions } from "./Questions";
+
+// export const userContext = createContext()
 
 function Home() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -94,7 +96,8 @@ function Home() {
   } else {
     return (
       <div className="container">
-        <Progress current={currentQuestion + 1} total={questions.length} />
+        {/* <userContext.Provider value = {{currentQuestion, question}}> */}
+        <Progress current={currentQuestion + 1} total={questions.length}/>
         <div className="container-ques-ans-display">
           <Question question={question.question} />
           <div>
@@ -110,6 +113,7 @@ function Home() {
             </button>
           </div>
         </div>
+        {/* </userContext.Provider> */}
       </div>
     );
   }
